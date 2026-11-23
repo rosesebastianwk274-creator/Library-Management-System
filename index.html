@@ -1,0 +1,1613 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Aether Library Management System</title>
+    <link rel="icon" href="./Images/Favicon.jpeg" type="image/jpeg">
+    <style>
+      :root {
+        --d: #443025;
+        --s: #7f5836;
+        --m: #aa7f66;
+        --p: #ec9c9d;
+        --l: #f5d2d2;
+        --bg: #FAEADC;
+        --r: 14px;
+        --sh: 0 4px 14px rgba(68, 48, 37, 0.12);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font:
+          16px/1.55 system-ui,
+          "Segoe UI",
+          sans-serif;
+        color: var(--d);
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      h1,
+      h2,
+      h3,
+      .logo {
+        font-family: Georgia, "Times New Roman", serif;
+        margin: 0 0 0.5em;
+        line-height: 1.2;
+      }
+      a {
+        color: var(--s);
+      }
+      header {
+        background: var(--d);
+        color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        box-shadow: var(--sh);
+      }
+      .bar {
+        max-width: 1200px;
+        margin: auto;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .logo {
+        font-size: 1.4rem;
+        color: var(--l);
+        text-decoration: none;
+        margin: 0;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .logo i {
+        background: var(--p);
+        color: var(--d);
+        border-radius: 8px;
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+        font-style: normal;
+      }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+        margin-left: auto;
+      }
+      nav a {
+        color: var(--l);
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-size: 0.92rem;
+      }
+      nav a:hover {
+        background: var(--s);
+      }
+      nav a.on {
+        background: var(--p);
+        color: var(--d);
+        font-weight: 600;
+      }
+      #burger {
+        display: none;
+        margin-left: auto;
+        background: none;
+        border: 1px solid var(--m);
+        color: #fff;
+        border-radius: 8px;
+        padding: 6px 10px;
+      }
+      main {
+        flex: 1;
+        width: 100%;
+        max-width: 1200px;
+        margin: auto;
+        padding: 24px 16px;
+      }
+      footer {
+        background: var(--d);
+        color: var(--l);
+        padding: 24px 16px;
+        font-size: 0.92rem;
+      }
+      footer div {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        justify-content: space-between;
+      }
+      footer a {
+        color: var(--p);
+      }
+      .hero {
+        background: linear-gradient(135deg, var(--d), var(--s));
+        color: #fff;
+        border-radius: var(--r);
+        padding: 48px 28px;
+        box-shadow: var(--sh);
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .hero p {
+        max-width: 560px;
+        color: var(--l);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: 18px;
+      }
+      .card,
+      .panel {
+        background: #fff;
+        border-radius: var(--r);
+        box-shadow: var(--sh);
+        padding: 16px;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        transition: transform 0.2s;
+      }
+      .card:hover {
+        transform: translateY(-3px);
+      }
+      .card h3 {
+        font-size: 1.02rem;
+        margin: 0;
+      }
+      .card small {
+        color: var(--m);
+      }
+        .cv {
+        position: relative;
+        justify-content: center;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .cv img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: white;
+    }
+
+    .cv span {
+        position: absolute;
+        text-align: center;
+        padding: 10px;
+    }
+      .b {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 99px;
+        font-size: 0.78rem;
+        background: var(--l);
+        color: var(--d);
+      }
+      .ok {
+        background: #dff0d8;
+        color: #2d5a1c;
+      }
+      .no {
+        background: var(--p);
+        color: var(--d);
+      }
+      button,
+      .btn {
+        font: inherit;
+        cursor: pointer;
+        border: 0;
+        border-radius: 10px;
+        padding: 8px 14px;
+        background: var(--s);
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        transition: background 0.2s;
+      }
+      button:hover,.btn:hover {
+        background: var(--l);
+        color: var(--d);
+    }
+      .alt {
+        background: var(--p);
+        color: var(--d);
+      }
+      .alt:hover {
+        background: var(--m);
+        color: #fff;
+      }
+      .sm {
+        padding: 4px 10px;
+        font-size: 0.85rem;
+      }
+      .ghost {
+        background: #fff;
+        color: var(--d);
+        border: 1px solid var(--m);
+      }
+      input,
+      select,
+      textarea {
+        font: inherit;
+        padding: 9px 12px;
+        border: 1px solid var(--m);
+        border-radius: 10px;
+        background: #fff;
+        color: var(--d);
+        width: 100%;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus,
+      button:focus-visible {
+        outline: 3px solid var(--p);
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin: 10px 0 4px;
+      }
+      form.f {
+        max-width: 480px;
+        margin: auto;
+      }
+      .pw {
+        position: relative;
+      }
+      .pw button {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        padding: 5px 10px;
+        background: var(--l);
+        color: var(--d);
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .stat {
+        background: var(--l);
+        border-radius: var(--r);
+        padding: 14px;
+      }
+      .stat b {
+        font:
+          700 1.7rem Georgia,
+          serif;
+        display: block;
+      }
+      .tw {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        background: #fff;
+      }
+      th,
+      td {
+        padding: 8px 10px;
+        text-align: left;
+        border-bottom: 1px solid var(--l);
+        vertical-align: top;
+      }
+      th {
+        background: var(--l);
+      }
+      .tabs {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+      .empty {
+        text-align: center;
+        padding: 30px;
+        color: var(--m);
+      }
+      h2.t {
+        margin: 28px 0 14px;
+      }
+      #toast {
+        position: fixed;
+        bottom: 18px;
+        right: 18px;
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .tt {
+        background: var(--d);
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 10px;
+        border-left: 6px solid var(--p);
+        box-shadow: var(--sh);
+      }
+      .tt.err {
+        background: #7A2F33;
+      }
+      dialog {
+        border: 0;
+        border-radius: var(--r);
+        max-width: 560px;
+        width: 92%;
+        box-shadow: var(--sh);
+        color: var(--d);
+      }
+      dialog::backdrop {
+        background: rgba(68, 48, 37, 0.55);
+      }
+      @media (max-width: 820px) {
+        #burger {
+          display: block;
+        }
+        nav {
+          display: none;
+          width: 100%;
+        }
+        nav.open {
+          display: flex;
+          flex-direction: column;
+        }
+        .hero h1 {
+          font-size: 1.7rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="bar">
+        <a class="logo" href="#/home"><i>A</i>Aether</a
+        ><button id="burger" times new roman-label="Menu" data-act="burger">Menu</button>
+        <nav id="nav"></nav>
+      </div>
+    </header>
+    <main id="app"></main>
+    <footer>
+      <div>
+        <span
+          ><b>Aether Library</b><br />Institute of Engineering,
+          Bengaluru</span
+        ><span
+          >Email:
+          <a href="mailto:library@bibliotheca.test">library@bibliotheca.test</a
+          ><br />Phone: <a href="tel:+918012345678">+91 80 1234 5678</a></span
+        ><span>Mon–Sat, 9 AM – 6 PM<br />Academic demo prototype</span>
+      </div>
+    </footer>
+    <div id="toast" aria-live="polite"></div>
+    <dialog id="dlg"></dialog>
+    <script>
+      /* ===== 1. STORAGE & DATA ===== */
+      const DAY = 864e5,
+        FEE = 50,
+        MAXC = 3,
+        LOAN = 14;
+      const BR = [
+        "Computer Science & Engineering (Core/AIML/ISE)",
+        "Electronics & Communication Engineering",
+        "Electrical & Electronics Engineering",
+        "Mechanical Engineering",
+        "Robotics",
+        "Civil Engineering",
+        "Aeronautics (Core/Aerospace)",
+        "Automotive Engineering",
+      ];
+      const CATS = ["Student", "Faculty Member", "Library Committee Member"],
+        ROLEOF = {
+          Student: "student",
+          "Faculty Member": "faculty",
+          "Library Committee Member": "committee",
+        };
+      const FBC = [
+        "General",
+        "Book request",
+        "Service quality",
+        "Website issue",
+        "Other",
+      ];
+      const $ = (s) => document.querySelector(s),
+        now = () => Date.now(),
+        fmt = (t) => (t ? new Date(t).toLocaleDateString("en-IN") : "—"),
+        inr = (n) => "₹" + n;
+      const esc = (s) =>
+        String(s ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      const hash = (p) => {
+        let h = 5381;
+        for (const c of "lms" + p) h = (h * 33) ^ c.charCodeAt(0);
+        return "h" + (h >>> 0);
+      };
+      const RAW = [
+        "Introduction to Algorithms|Cormen, Leiserson, Rivest, Stein|Textbook|0|4|95|F",
+        "Artificial Intelligence: A Modern Approach|Stuart Russell & Peter Norvig|Textbook|0|3|90|F",
+        "Operating System Concepts|Silberschatz, Galvin, Gagne|Textbook|0|3|80|F",
+        "Database System Concepts|Korth & Sudarshan|Textbook|0|2|70|F",
+        "Clean Code|Robert C. Martin|Reference|0|2|85|F",
+        "Microelectronic Circuits|Sedra & Smith|Textbook|1|3|75|F",
+        "Digital Signal Processing|Proakis & Manolakis|Textbook|1|2|60|F",
+        "Communication Systems|Simon Haykin|Textbook|1|3|65|F",
+        "Electric Machinery Fundamentals|Stephen Chapman|Textbook|2|3|70|F",
+        "Power System Analysis|Nagrath & Kothari|Textbook|2|3|72|I",
+        "Fundamentals of Electric Circuits|Alexander & Sadiku|Textbook|2|4|78|F",
+        "Engineering Thermodynamics|P. K. Nag|Textbook|3|4|88|I",
+        "Theory of Machines|S. S. Rattan|Textbook|3|3|68|I",
+        "Fluid Mechanics|R. K. Bansal|Textbook|3|3|74|I",
+        "Introduction to Robotics|John J. Craig|Textbook|4|2|82|F",
+        "Robotics: Modelling, Planning and Control|Siciliano & Sciavicco|Reference|4|2|58|F",
+        "Probabilistic Robotics|Thrun, Burgard, Fox|Reference|4|1|55|F",
+        "Surveying Vol. 1|B. C. Punmia|Textbook|5|4|77|I",
+        "Soil Mechanics and Foundation Engineering|K. R. Arora|Textbook|5|3|62|I",
+        "Design of Steel Structures|N. Subramanian|Textbook|5|2|57|I",
+        "Fundamentals of Aerodynamics|John D. Anderson|Textbook|6|3|84|F",
+        "Aircraft Structures|T. H. G. Megson|Textbook|6|2|61|F",
+        "Rocket Propulsion Elements|George P. Sutton|Reference|6|2|66|F",
+        "Automotive Mechanics|William Crouse|Textbook|7|3|59|F",
+        "Internal Combustion Engine Fundamentals|John B. Heywood|Reference|7|2|73|F",
+        "Automotive Engineering|Kirpal Singh|Textbook|7|3|64|I",
+        "Wings of Fire|A. P. J. Abdul Kalam|Biography|G|5|99|I",
+        "The Discovery of India|Jawaharlal Nehru|History|G|3|67|I",
+        "The Guide|R. K. Narayan|Fiction|G|3|69|I",
+        "Atomic Habits|James Clear|Self-help|G|4|96|F",
+        "Sapiens|Yuval Noah Harari|History|G|4|92|F",
+      ];
+      function seed() {
+        const T = now();
+        const books = RAW.map((r, i) => {
+          const [t, a, c, b, n, p, o] = r.split("|"),
+            br = b === "G" ? "General" : BR[+b];
+          return {
+            id: "B" + String(i + 1).padStart(3, "0"),
+            title: t,
+            author: a,
+            category: c,
+            branch: br,
+            desc: `${t} by ${a} is a ${c.toLowerCase()} title recommended for ${br} readers.`,
+            total: +n,
+            avail: +n,
+            pop: +p,
+            origin: o,
+          };
+        });
+        books[0].avail--;
+        return {
+          seq: 100,
+          books,
+          carts: {},
+          wish: {},
+          feedback: [],
+          payments: [],
+          users: [
+            {
+              id: "U1",
+              name: "Admin User",
+              email: "admin@lib.test",
+              phone: "9800000001",
+              pass: hash("Admin@123"),
+              branch: BR[0],
+              cat: "Administrator",
+              role: "admin",
+            },
+            {
+              id: "U2",
+              name: "Librarian Rao",
+              email: "librarian@lib.test",
+              phone: "9800000002",
+              pass: hash("Lib@123"),
+              branch: BR[0],
+              cat: "Librarian",
+              role: "librarian",
+            },
+            {
+              id: "U3",
+              name: "Asha Student",
+              email: "student@lib.test",
+              phone: "9800000003",
+              pass: hash("Student@123"),
+              branch: BR[4],
+              cat: "Student",
+              role: "student",
+            },
+          ],
+          issues: [
+            {
+              id: "I1",
+              uid: "U3",
+              bid: "B001",
+              status: "issued",
+              reqDate: T - 20 * DAY,
+              issueDate: T - 19.5 * DAY,
+              dueDate: T - 19.5 * DAY + LOAN * DAY,
+              returnDate: null,
+              paidDays: 0,
+            },
+            {
+              id: "I2",
+              uid: "U3",
+              bid: "B005",
+              status: "pending",
+              reqDate: T - DAY,
+            },
+          ],
+        };
+      }
+      const DB = {
+        k: "lms_db",
+        d: null,
+        load() {
+          try {
+            this.d = JSON.parse(localStorage.getItem(this.k));
+          } catch (e) {
+            this.d = null;
+          }
+          if (
+            !this.d ||
+            !Array.isArray(this.d.books) ||
+            !Array.isArray(this.d.users)
+          ) {
+            this.d = seed();
+            this.save();
+          }
+        },
+        save() {
+          try {
+            localStorage.setItem(this.k, JSON.stringify(this.d));
+          } catch (e) {
+            toast("Could not save data (storage blocked or full).", "err");
+          }
+        },
+      };
+      const D = () => DB.d,
+        nid = (p) => p + ++D().seq,
+        bk = (id) => D().books.find((b) => b.id === id);
+      const cartOf = (id) => (D().carts[id] = D().carts[id] || []),
+        wishOf = (id) => (D().wish[id] = D().wish[id] || []);
+      function toast(m, t) {
+        const e = document.createElement("div");
+        e.className = "tt " + (t || "");
+        e.textContent = m;
+        $("#toast").append(e);
+        setTimeout(() => e.remove(), 3500);
+      }
+
+      /* ===== 2. AUTH & SESSION ===== */
+      const user = () =>
+          D().users.find((u) => u.id === sessionStorage.getItem("lms_uid")),
+        staff = (u) => !!u && ["librarian", "admin"].includes(u.role);
+      const emailOk = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+      function register(f) {
+        const v = (k) => (f[k].value || "").trim(),
+          name = v("name"),
+          email = v("email").toLowerCase(),
+          phone = v("phone"),
+          pw = f.pass.value,
+          br = v("branch"),
+          cat = v("cat");
+        if (!name || !email || !phone || !pw || !br || !cat)
+          return toast("Please fill in all fields.", "err");
+        if (!emailOk(email))
+          return toast("Enter a valid email address.", "err");
+        if (!/^\+?\d[\d\s-]{8,13}$/.test(phone))
+          return toast("Enter a valid phone number (9–14 digits).", "err");
+        if (pw.length < 6)
+          return toast("Password must be at least 6 characters.", "err");
+        if (!BR.includes(br) || !CATS.includes(cat))
+          return toast("Invalid branch or category.", "err");
+        if (D().users.some((u) => u.email === email))
+          return toast("An account with this email already exists.", "err");
+        const u = {
+          id: nid("U"),
+          name,
+          email,
+          phone,
+          pass: hash(pw),
+          branch: br,
+          cat,
+          role: ROLEOF[cat],
+        };
+        D().users.push(u);
+        DB.save();
+        sessionStorage.setItem("lms_uid", u.id);
+        toast("Welcome, " + name + "! Account created.");
+        go("foryou");
+      }
+      function login(f) {
+        const email = f.email.value.trim().toLowerCase(),
+          u = D().users.find(
+            (x) => x.email === email && x.pass === hash(f.pass.value),
+          );
+        if (!u) return toast("Invalid email or password.", "err");
+        sessionStorage.setItem("lms_uid", u.id);
+        toast("Logged in as " + u.name);
+        go(staff(u) ? "admin" : "home");
+      }
+      function logout() {
+        sessionStorage.removeItem("lms_uid");
+        toast("You have been logged out.");
+        go("home");
+      }
+      const need = () => {
+        toast("Please log in first.", "err");
+        go("login");
+        return false;
+      };
+
+      /* ===== 3. PROFILE ===== */
+      function saveProfile(f) {
+        const u = user(),
+          name = f.name.value.trim(),
+          phone = f.phone.value.trim();
+        if (!name || !/^\+?\d[\d\s-]{8,13}$/.test(phone))
+          return toast("Enter a name and a valid phone number.", "err");
+        u.name = name;
+        u.phone = phone;
+        u.branch = f.branch.value;
+        if (!staff(u)) {
+          u.cat = f.cat.value;
+          u.role = ROLEOF[u.cat];
+        }
+        DB.save();
+        toast("Profile updated.");
+        render();
+      }
+
+      /* ===== 4. CATALOGUE ===== */
+      const S = { q: "", cat: "", br: "", sort: "az" };
+      const avail = (b) => b.avail > 0,
+        hasActive = (uid, bid) =>
+          D().issues.some(
+            (i) =>
+              i.uid === uid &&
+              i.bid === bid &&
+              ["pending", "issued"].includes(i.status),
+          );
+      function cover(b) {
+    const c = ['#443025','#7F5836','#AA7F66','#EC9C9D','#7F5836'];
+    const i = parseInt(b.id.slice(1)) % 5;
+
+    return `
+        <div class="cv"
+             style="background:linear-gradient(135deg,${c[i]},${c[(i+2)%5]})">
+
+            <img
+                src="images/${b.id}.jpg"
+                alt="Cover of ${esc(b.title)}"
+                onload="this.nextElementSibling.style.display='none'"
+                onerror="this.remove()"
+            >
+
+            <span>${esc(b.title)}</span>
+        </div>
+    `;
+}
+      function card(b, x) {
+        const u = user(),
+          w = u && wishOf(u.id).includes(b.id);
+        return `<div class="card">${cover(b)}<h3>${esc(b.title)}</h3><small>${esc(b.author)}</small><div><span class="b">${esc(b.category)}</span> <span class="b ${avail(b) ? "ok" : "no"}">${avail(b) ? b.avail + " of " + b.total + " available" : "Currently issued"}</span></div>
+ <div class="row" style="margin-top:auto"><button class="sm ghost" data-act="detail" data-id="${b.id}">Details</button><button class="sm" data-act="cart" data-id="${b.id}">Add to cart</button><button class="sm alt" data-act="${w ? "unwish" : "wish"}" data-id="${b.id}">${w ? "Wishlisted" : "Wishlist"}</button></div>${x || ""}</div>`;
+      }
+      function filtered() {
+        const q = S.q.toLowerCase();
+        let r = D().books.filter(
+          (b) =>
+            (!q ||
+              b.title.toLowerCase().includes(q) ||
+              b.author.toLowerCase().includes(q)) &&
+            (!S.cat || b.category === S.cat) &&
+            (!S.br || b.branch === S.br),
+        );
+        return r.sort((a, b) =>
+          S.sort === "pop" ? b.pop - a.pop : a.title.localeCompare(b.title),
+        );
+      }
+      function catRes() {
+        const r = filtered();
+        return r.length
+          ? `<p>${r.length} book(s) found</p><div class="grid">${r.map((b) => card(b)).join("")}</div>`
+          : '<div class="empty">No books match your search. Try clearing the filters.</div>';
+      }
+      function detail(id) {
+        const b = bk(id);
+        if (!b) return;
+        $("#dlg").innerHTML =
+          `<h2>${esc(b.title)}</h2>${cover(b)}<p><b>${esc(b.author)}</b><br>ID ${b.id} · ${esc(b.category)} · ${esc(b.branch)}</p><p>${esc(b.desc)}</p><p>Copies: ${b.avail} available of ${b.total} · Popularity ${b.pop}/100<br><span class="b ${avail(b) ? "ok" : "no"}">${avail(b) ? "Available" : "Currently issued"}</span></p><button data-act="close">Close</button>`;
+        $("#dlg").showModal();
+      }
+
+      /* ===== 5. RECOMMENDATIONS ===== */
+      const recs = (u) =>
+        D()
+          .books.filter((b) => b.branch === u.branch)
+          .sort((a, b) => b.pop - a.pop);
+
+      /* ===== 6/7. CART & WISHLIST ===== */
+      function addCart(id) {
+        const u = user();
+        if (!u) return need();
+        const c = cartOf(u.id),
+          b = bk(id);
+        if (!b) return false;
+        if (c.includes(id)) {
+          toast("Already in your cart.", "err");
+          return false;
+        }
+        if (c.length >= MAXC) {
+          toast(
+            "Cart limit reached: maximum 3 books. Remove one first.",
+            "err",
+          );
+          return false;
+        }
+        if (hasActive(u.id, id)) {
+          toast(
+            "You already have a pending or issued copy of this book.",
+            "err",
+          );
+          return false;
+        }
+        if (!avail(b)) {
+          toast("Currently issued. Add it to your wishlist instead.", "err");
+          return false;
+        }
+        c.push(id);
+        DB.save();
+        toast("Added to cart (" + c.length + "/3).");
+        render();
+        return true;
+      }
+      function wish(id) {
+        const u = user();
+        if (!u) return need();
+        const w = wishOf(u.id);
+        if (w.includes(id)) return toast("Already in wishlist.", "err");
+        w.push(id);
+        DB.save();
+        toast("Added to wishlist.");
+        render();
+      }
+      function unwish(id) {
+        const u = user(),
+          w = wishOf(u.id);
+        D().wish[u.id] = w.filter((x) => x !== id);
+        DB.save();
+        render();
+      }
+      function toCart(id) {
+        const u = user();
+        if (addCart(id)) {
+          D().wish[u.id] = wishOf(u.id).filter((x) => x !== id);
+          DB.save();
+          render();
+        }
+      }
+      function toWish(id) {
+        const u = user();
+        D().carts[u.id] = cartOf(u.id).filter((x) => x !== id);
+        if (!wishOf(u.id).includes(id)) wishOf(u.id).push(id);
+        DB.save();
+        toast("Moved to wishlist.");
+        render();
+      }
+      function uncart(id) {
+        const u = user();
+        D().carts[u.id] = cartOf(u.id).filter((x) => x !== id);
+        DB.save();
+        render();
+      }
+
+      /* ===== 8/9. ISSUE, RETURN, DUE DATES ===== */
+      function checkout() {
+        const u = user(),
+          c = cartOf(u.id);
+        if (!c.length) return toast("Your cart is empty.", "err");
+        let n = 0,
+          skip = [];
+        c.forEach((id) => {
+          const b = bk(id);
+          if (b && avail(b) && !hasActive(u.id, id)) {
+            D().issues.push({
+              id: nid("I"),
+              uid: u.id,
+              bid: id,
+              status: "pending",
+              reqDate: now(),
+            });
+            n++;
+          } else skip.push(b ? b.title : id);
+        });
+        D().carts[u.id] = [];
+        DB.save();
+        toast(
+          n +
+            " request(s) submitted." +
+            (skip.length ? " Skipped: " + skip.join(", ") : ""),
+          skip.length ? "err" : "",
+        );
+        go("mybooks");
+      }
+      function approve(id) {
+        const i = D().issues.find((x) => x.id === id),
+          b = bk(i.bid);
+        if (!b || i.status !== "pending") return;
+        if (b.avail < 1) return toast("No copies available to issue.", "err");
+        b.avail--;
+        i.status = "issued";
+        i.issueDate = now();
+        i.dueDate = i.issueDate + LOAN * DAY;
+        i.paidDays = 0;
+        DB.save();
+        toast("Approved and issued. Due " + fmt(i.dueDate));
+        render();
+      }
+      function reject(id) {
+        const i = D().issues.find((x) => x.id === id);
+        if (i.status !== "pending") return;
+        if (!confirm("Reject this request?")) return;
+        i.status = "rejected";
+        i.returnDate = now();
+        DB.save();
+        toast("Request rejected.");
+        render();
+      }
+      function giveBack(id) {
+        const i = D().issues.find((x) => x.id === id),
+          b = bk(i.bid);
+        if (i.status !== "issued") return;
+        i.status = "returned";
+        i.returnDate = now();
+        if (b && b.avail < b.total) b.avail++;
+        DB.save();
+        toast(
+          "Marked as returned." +
+            (owed(i) ? " Late fee " + inr(owed(i)) + " is payable." : ""),
+        );
+        render();
+      }
+      function odDays(i) {
+        if (i.status === "issued" && now() > i.dueDate)
+          return Math.ceil((now() - i.dueDate) / DAY);
+        if (i.status === "returned" && i.issueDate && i.returnDate > i.dueDate)
+          return Math.ceil((i.returnDate - i.dueDate) / DAY);
+        return 0;
+      }
+      const owed = (i) => Math.max(0, odDays(i) - (i.paidDays || 0)) * FEE;
+      const stBadge = (i) =>
+        ({
+          pending: '<span class="b">Pending</span>',
+          issued: odDays(i)
+            ? '<span class="b no">Overdue</span>'
+            : '<span class="b ok">Issued</span>',
+          returned: '<span class="b ok">Returned</span>',
+          rejected: '<span class="b no">Rejected</span>',
+        })[i.status];
+
+      /* ===== 10. PAYMENT SIMULATION ===== */
+      function pay(id) {
+        const u = user(),
+          i = D().issues.find((x) => x.id === id);
+        if (!i || i.uid !== u.id) return;
+        const amt = owed(i),
+          m = $("#m-" + id).value;
+        if (!amt) return toast("Nothing to pay for this record.", "err");
+        const ok = m !== "fail";
+        D().payments.push({
+          id: nid("P"),
+          uid: u.id,
+          iid: id,
+          amt,
+          method: m === "fail" ? "Simulated failure" : m,
+          status: ok ? "Success" : "Failed",
+          date: now(),
+        });
+        if (ok) i.paidDays = odDays(i);
+        DB.save();
+        toast(
+          ok
+            ? "Payment of " + inr(amt) + " successful (simulated)."
+            : "Payment failed (simulated). Please try again.",
+          ok ? "" : "err",
+        );
+        render();
+      }
+
+      /* ===== 11. ADMIN ===== */
+      const A = { tab: "ov", edit: null };
+      function saveBook(f) {
+        const v = (k) => f[k].value.trim(),
+          t = v("title"),
+          a = v("author"),
+          tot = parseInt(f.total.value),
+          av = parseInt(f.avail.value);
+        if (!t || !a || !v("category") || isNaN(tot) || tot < 1)
+          return toast(
+            "Title, author, category and total copies (≥1) are required.",
+            "err",
+          );
+        if (isNaN(av) || av < 0 || av > tot)
+          return toast(
+            "Available copies must be between 0 and total copies.",
+            "err",
+          );
+        const dup = D().books.find(
+          (b) =>
+            b.title.toLowerCase() === t.toLowerCase() &&
+            b.author.toLowerCase() === a.toLowerCase() &&
+            b.id !== f.id.value,
+        );
+        if (dup)
+          return toast("This book already exists (" + dup.id + ").", "err");
+        const o = {
+          title: t,
+          author: a,
+          category: v("category"),
+          branch: f.branch.value,
+          desc: v("desc") || t + " by " + a,
+          total: tot,
+          avail: av,
+        };
+        if (f.id.value) {
+          Object.assign(bk(f.id.value), o);
+          toast("Book updated.");
+        } else {
+          const n =
+            Math.max(0, ...D().books.map((b) => parseInt(b.id.slice(1)))) + 1;
+          D().books.push({
+            id: "B" + String(n).padStart(3, "0"),
+            pop: 50,
+            origin: "F",
+            ...o,
+          });
+          toast("Book added.");
+        }
+        A.edit = null;
+        DB.save();
+        render();
+      }
+      function delBook(id) {
+        if (
+          D().issues.some(
+            (i) => i.bid === id && ["pending", "issued"].includes(i.status),
+          )
+        )
+          return toast(
+            "Cannot delete: book has pending or issued records.",
+            "err",
+          );
+        if (!confirm("Delete this book permanently?")) return;
+        D().books = D().books.filter((b) => b.id !== id);
+        D().users.forEach((u) => {
+          D().carts[u.id] = cartOf(u.id).filter((x) => x !== id);
+          D().wish[u.id] = wishOf(u.id).filter((x) => x !== id);
+        });
+        DB.save();
+        toast("Book deleted.");
+        render();
+      }
+      function setRole(id, r) {
+        const u = D().users.find((x) => x.id === id);
+        if (u.id === user().id)
+          return toast("You cannot change your own role.", "err");
+        if (!confirm("Change role of " + u.name + " to " + r + "?"))
+          return render();
+        u.role = r;
+        DB.save();
+        toast("Role updated.");
+        render();
+      }
+      function exportData() {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(
+          new Blob([JSON.stringify(D(), null, 2)], {
+            type: "application/json",
+          }),
+        );
+        a.download =
+          "library-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+        a.click();
+        toast("Backup downloaded.");
+      }
+      function importData(file) {
+        const r = new FileReader();
+        r.onload = () => {
+          try {
+            const d = JSON.parse(r.result);
+            if (
+              !["books", "users", "issues", "payments", "feedback"].every((k) =>
+                Array.isArray(d[k]),
+              ) ||
+              typeof d.carts !== "object" ||
+              typeof d.wish !== "object"
+            )
+              throw 0;
+            if (!d.users.some((u) => u.role === "admin")) throw 0;
+            if (!confirm("Importing replaces ALL current data. Continue?"))
+              return;
+            DB.d = d;
+            DB.save();
+            sessionStorage.removeItem("lms_uid");
+            toast("Data imported. Please log in again.");
+            go("login");
+          } catch (e) {
+            toast("Invalid backup file.", "err");
+          }
+        };
+        r.onerror = () => toast("Could not read file.", "err");
+        r.readAsText(file);
+      }
+      function resetData() {
+        if (!confirm("Reset everything to demo data?")) return;
+        DB.d = seed();
+        DB.save();
+        sessionStorage.removeItem("lms_uid");
+        toast("Demo data restored.");
+        go("home");
+      }
+
+      /* ===== 12. FEEDBACK ===== */
+      function sendFeedback(f) {
+        const n = f.name.value.trim(),
+          e = f.email.value.trim(),
+          m = f.message.value.trim();
+        if (!n || !m) return toast("Name and message are required.", "err");
+        if (!emailOk(e)) return toast("Enter a valid email.", "err");
+        D().feedback.push({
+          id: nid("F"),
+          uid: (user() || {}).id || null,
+          name: n,
+          email: e,
+          cat: f.cat.value,
+          message: m,
+          date: now(),
+        });
+        DB.save();
+        f.message.value = "";
+        toast("Thank you! Your feedback was submitted.");
+      }
+
+      /* ===== 13. UI & NAVIGATION ===== */
+      const tbl = (h, r) =>
+        r.length
+          ? `<div class="tw"><table><tr>${h.map((x) => "<th>" + x + "</th>").join("")}</tr>${r.map((c) => "<tr>" + c.map((x) => "<td>" + x + "</td>").join("") + "</tr>").join("")}</table></div>`
+          : '<div class="empty">Nothing to show yet.</div>';
+      const opts = (a, s) =>
+        a
+          .map((x) => `<option ${x === s ? "selected" : ""}>${esc(x)}</option>`)
+          .join("");
+      const pwf = (n, l) =>
+        `<label>${l || "Password"}</label><div class="pw"><input type="password" name="${n}" required autocomplete="off"><button type="button" data-act="eye">Show</button></div>`;
+      const go = (r) => {
+        if (location.hash === "#/" + r) render();
+        else location.hash = "#/" + r;
+      };
+      const route = () => location.hash.replace("#/", "") || "home";
+      const ROUTES = {
+        home: "Home",
+        foryou: "For You",
+        catalogue: "Catalogue",
+        cart: "Cart",
+        wishlist: "Wishlist",
+        mybooks: "My Books",
+        due: "Due Dates",
+        payments: "Payments",
+        feedback: "Feedback",
+        profile: "Profile",
+        admin: "Admin Dashboard",
+      };
+      const PUBLIC = ["home", "catalogue", "feedback", "login", "register"];
+      function navHtml(u, r) {
+        const keys = u
+          ? Object.keys(ROUTES)
+              .filter((k) => k !== "admin" || staff(u))
+              .filter(
+                (k) =>
+                  !(
+                    staff(u) &&
+                    [
+                      "foryou",
+                      "cart",
+                      "wishlist",
+                      "mybooks",
+                      "due",
+                      "payments",
+                    ].includes(k)
+                  ),
+              )
+          : ["home", "catalogue", "feedback"];
+        let h = keys
+          .map(
+            (k) =>
+              `<a href="#/${k}" class="${r === k ? "on" : ""}">${ROUTES[k]}</a>`,
+          )
+          .join("");
+        return (
+          h +
+          (u
+            ? `<a href="#" data-act="logout">Logout (${esc(u.name.split(" ")[0])})</a>`
+            : `<a href="#/login" class="${r === "login" ? "on" : ""}">Login</a><a href="#/register" class="${r === "register" ? "on" : ""}">Register</a>`)
+        );
+      }
+      const bookRow = (i, extra) => {
+        const b = bk(i.bid) || { title: "(deleted book)" };
+        return [
+          esc(b.title),
+          fmt(i.reqDate),
+          stBadge(i),
+          fmt(i.issueDate),
+          fmt(i.dueDate),
+          i.status === "returned" ? fmt(i.returnDate) : "—",
+          ...extra,
+        ];
+      };
+
+      const V = {
+        home(u) {
+          const top = [...D().books].sort((a, b) => b.pop - a.pop);
+          return `<div class="hero"><h1>Welcome to Aether</h1><p>Search, reserve and borrow from our collection of engineering textbooks, references and popular reads. Loans run ${LOAN} days.</p>
+ <form data-form="hsearch" class="row"><input name="q" placeholder="Search by title or author" style="max-width:420px"><button class="alt">Search books</button></form>
+ ${u ? "" : '<div class="row" style="margin-top:14px"><a class="btn alt" href="#/login">Login</a><a class="btn ghost" href="#/register">Register</a></div>'}</div>
+ <h2 class="t">Featured books</h2><div class="grid">${D()
+   .books.filter((b) => b.avail > 0)
+   .filter((b, i) => i % 7 === 0)
+   .slice(0, 4)
+   .map((b) => card(b))
+   .join("")}</div>
+ <h2 class="t">Popular books</h2><div class="grid">${top
+   .slice(0, 4)
+   .map((b) => card(b))
+   .join("")}</div>
+ <h2 class="t">Browse by academic branch</h2><div class="row">${BR.map((b, i) => `<button class="ghost" data-act="branch" data-id="${i}">${esc(b)}</button>`).join("")}</div>
+ <div class="panel" style="margin-top:28px"><h2>About the library</h2><p>Bibliotheca serves students, faculty and committee members across eight engineering branches. Request up to three books at a time, track due dates online and settle late fees (₹${FEE} per day) from your account.</p></div>`;
+        },
+        catalogue() {
+          return `<h1>Catalogue</h1><div class="panel row"><input data-f="q" placeholder="Search title or author" value="${esc(S.q)}" style="flex:2;min-width:200px"><select data-f="cat" style="flex:1"><option value="">All categories</option>${opts([...new Set(D().books.map((b) => b.category))].sort(), S.cat)}</select><select data-f="br" style="flex:1"><option value="">All branches</option>${opts([...BR, "General"], S.br)}</select><select data-f="sort" style="flex:1"><option value="az" ${S.sort === "az" ? "selected" : ""}>A–Z</option><option value="pop" ${S.sort === "pop" ? "selected" : ""}>Most popular</option></select></div><div id="res" style="margin-top:16px">${catRes()}</div>`;
+        },
+        foryou(u) {
+          const r = recs(u),
+            g = D()
+              .books.filter((b) => b.branch === "General" || !r.includes(b))
+              .sort((a, b) => b.pop - a.pop);
+          const sec = (o) =>
+            `<div class="grid">${g
+              .filter((b) => b.origin === o)
+              .slice(0, 4)
+              .map((b) => card(b))
+              .join("")}</div>`;
+          return `<h1>For You</h1><p>Picks for <b>${esc(u.branch)}</b>. Change your branch in <a href="#/profile">Profile</a>.</p>${r.length ? `<div class="grid">${r.map((b) => card(b)).join("")}</div>` : '<div class="empty">No books for your branch yet.</div>'}
+ <h2 class="t">Popular Indian authors</h2>${sec("I")}<h2 class="t">Popular foreign authors</h2>${sec("F")}`;
+        },
+        cart(u) {
+          const c = cartOf(u.id).map(bk).filter(Boolean);
+          return `<h1>Cart <span class="b">${c.length}/${MAXC}</span></h1>${c.length ? `<div class="grid">${c.map((b) => `<div class="card">${cover(b)}<h3>${esc(b.title)}</h3><small>${esc(b.author)}</small><div class="row"><button class="sm alt" data-act="uncart" data-id="${b.id}">Remove</button><button class="sm ghost" data-act="towish" data-id="${b.id}">Move to wishlist</button></div></div>`).join("")}</div><p><button data-act="checkout">Submit issue request for ${c.length} book(s)</button></p>` : '<div class="empty">Your cart is empty. Visit the <a href="#/catalogue">catalogue</a>.</div>'}`;
+        },
+        wishlist(u) {
+          const w = wishOf(u.id).map(bk).filter(Boolean);
+          return `<h1>Wishlist (${w.length})</h1>${w.length ? `<div class="grid">${w.map((b) => `<div class="card">${cover(b)}<h3>${esc(b.title)}</h3><small>${esc(b.author)}</small><span class="b ${avail(b) ? "ok" : "no"}">${avail(b) ? "Available" : "Currently issued"}</span><div class="row"><button class="sm" data-act="tocart" data-id="${b.id}">Move to cart</button><button class="sm alt" data-act="unwish" data-id="${b.id}">Remove</button></div></div>`).join("")}</div>` : '<div class="empty">Your wishlist is empty.</div>'}`;
+        },
+        mybooks(u) {
+          const m = D()
+              .issues.filter((i) => i.uid === u.id)
+              .sort((a, b) => b.reqDate - a.reqDate),
+            p = (i) => m.filter((x) => x.status === i);
+          const t = (l, a, f) =>
+            `<h2 class="t">${l} (${a.length})</h2>` +
+            tbl(
+              ["Book", "Requested", "Status", "Issued", "Due", "Returned"],
+              a.map((i) => bookRow(i, [])),
+            );
+          return (
+            `<h1>My Books</h1>` +
+            t("Pending requests", p("pending")) +
+            t("Currently issued", p("issued")) +
+            t("Returned", p("returned")) +
+            t("Rejected", p("rejected"))
+          );
+        },
+        due(u) {
+          const a = D()
+              .issues.filter((i) => i.uid === u.id && i.status === "issued")
+              .sort((x, y) => x.dueDate - y.dueDate),
+            od = a.filter((i) => odDays(i));
+          return (
+            `<h1>Due Dates</h1>${od.length ? `<div class="panel" style="background:var(--l)"><b>${od.length} overdue book(s).</b> Late fee is ${inr(FEE)} per day. Pay in <a href="#/payments">Payments</a>.</div>` : ""}<br>` +
+            tbl(
+              ["Book", "Issued", "Due", "Days left / overdue", "Late fee"],
+              a.map((i) => {
+                const d = Math.ceil((i.dueDate - now()) / DAY);
+                return [
+                  esc((bk(i.bid) || {}).title),
+                  fmt(i.issueDate),
+                  fmt(i.dueDate),
+                  odDays(i)
+                    ? `<span class="b no">${odDays(i)} day(s) overdue</span>`
+                    : d + " day(s) left",
+                  inr(owed(i)),
+                ];
+              }),
+            )
+          );
+        },
+        payments(u) {
+          const m = D().issues.filter((i) => i.uid === u.id && owed(i) > 0),
+            h = D()
+              .payments.filter((p) => p.uid === u.id)
+              .sort((a, b) => b.date - a.date);
+          return (
+            `<h1>Payments</h1><p>Demo only: no real money, card, UPI or bank details are collected. Late fee: ${inr(FEE)} per overdue day.</p><h2 class="t">Outstanding fees</h2>` +
+            tbl(
+              ["Book", "Overdue days", "Amount", "Pay (simulated)"],
+              m.map((i) => [
+                esc((bk(i.bid) || {}).title),
+                odDays(i) - (i.paidDays || 0),
+                inr(owed(i)),
+                `<select id="m-${i.id}" style="width:auto"><option>Demo UPI</option><option>Demo Card</option><option value="fail">Simulate failed payment</option></select> <button class="sm" data-act="pay" data-id="${i.id}">Pay ${inr(owed(i))}</button>`,
+              ]),
+            ) +
+            `<h2 class="t">Payment history</h2>` +
+            tbl(
+              ["Date", "Book", "Amount", "Method", "Status"],
+              h.map((p) => {
+                const i = D().issues.find((x) => x.id === p.iid);
+                return [
+                  fmt(p.date),
+                  esc(i ? (bk(i.bid) || {}).title : "—"),
+                  inr(p.amt),
+                  esc(p.method),
+                  `<span class="b ${p.status === "Success" ? "ok" : "no"}">${p.status}</span>`,
+                ];
+              }),
+            )
+          );
+        },
+        feedback(u) {
+          return `<h1>Feedback &amp; Support</h1><div class="panel"><p>Need help? Email <a href="mailto:library@bibliotheca.test">library@bibliotheca.test</a> or call <a href="tel:+918012345678">+91 80 1234 5678</a>.</p></div><form class="f" data-form="feedback"><label>Name</label><input name="name" required value="${esc(u ? u.name : "")}"><label>Email</label><input name="email" type="email" required value="${esc(u ? u.email : "")}"><label>Category</label><select name="cat">${opts(FBC)}</select><label>Message</label><textarea name="message" rows="5" required></textarea><p><button>Send feedback</button></p></form>`;
+        },
+        profile(u) {
+          return `<h1>Profile</h1><form class="f panel" data-form="profile"><label>Email (cannot be changed)</label><input value="${esc(u.email)}" disabled><label>Full name</label><input name="name" value="${esc(u.name)}" required><label>Phone</label><input name="phone" value="${esc(u.phone)}" required><label>Academic branch</label><select name="branch">${opts(BR, u.branch)}</select><label>User category</label>${staff(u) ? `<input name="cat" value="${esc(u.cat)}" disabled>` : `<select name="cat">${opts(CATS, u.cat)}</select>`}<p><button>Save changes</button></p></form>`;
+        },
+        login() {
+          return `<h1 style="text-align:center">Login</h1><form class="f panel" data-form="login"><label>Email</label><input name="email" type="email" required>${pwf("pass")}<p><button>Login</button> <a href="#/register">Create an account</a></p></form>`;
+        },
+        register() {
+          return `<h1 style="text-align:center">Create account</h1><form class="f panel" data-form="register"><label>Full name</label><input name="name" required><label>Email</label><input name="email" type="email" required><label>Phone number</label><input name="phone" type="tel" required>${pwf("pass")}<label>Academic branch</label><select name="branch" required><option value="">Select branch</option>${opts(BR)}</select><label>User category</label><select name="cat" required><option value="">Select category</option>${opts(CATS)}</select><p style="font-size:.85rem;color:var(--m)">Librarian and admin accounts are authorised separately by an administrator.</p><p><button>Register</button> <a href="#/login">Already registered?</a></p></form>`;
+        },
+        admin(u) {
+          const d = D(),
+            act = d.issues.filter((i) => i.status === "issued"),
+            od = act.filter(odDays),
+            tot = d.payments
+              .filter((p) => p.status === "Success")
+              .reduce((s, p) => s + p.amt, 0);
+          const tabs = [
+            ["ov", "Overview"],
+            ["books", "Books"],
+            ["req", "Requests & returns"],
+            ["users", "Users"],
+            ["pay", "Payments"],
+            ["fb", "Feedback"],
+            ["data", "Backup"],
+          ];
+          const nm = (id) =>
+              esc(
+                (d.users.find((x) => x.id === id) || { name: "(deleted)" })
+                  .name,
+              ),
+            bt = (id) => esc((bk(id) || { title: "(deleted)" }).title);
+          let body = "";
+          if (A.tab === "ov")
+            body =
+              `<div class="stats">${[
+                ["Total books", d.books.reduce((s, b) => s + b.total, 0)],
+                ["Titles", d.books.length],
+                ["Available copies", d.books.reduce((s, b) => s + b.avail, 0)],
+                ["Issued", act.length],
+                [
+                  "Pending requests",
+                  d.issues.filter((i) => i.status === "pending").length,
+                ],
+                ["Overdue", od.length],
+                ["Users", d.users.length],
+                ["Payments collected", inr(tot)],
+              ]
+                .map((s) => `<div class="stat"><b>${s[1]}</b>${s[0]}</div>`)
+                .join("")}</div><h2>Overdue books</h2>` +
+              tbl(
+                ["User", "Book", "Due", "Days overdue", "Fee"],
+                od.map((i) => [
+                  nm(i.uid),
+                  bt(i.bid),
+                  fmt(i.dueDate),
+                  odDays(i),
+                  inr(owed(i)),
+                ]),
+              );
+          if (A.tab === "books") {
+            const b = (A.edit && bk(A.edit)) || {
+              title: "",
+              author: "",
+              category: "",
+              branch: "General",
+              desc: "",
+              total: 1,
+              avail: 1,
+              id: "",
+            };
+            body =
+              `<form class="panel" data-form="book"><h3>${b.id ? "Edit book " + b.id : "Add new book"}</h3><input type="hidden" name="id" value="${b.id}"><div class="grid" style="gap:0 14px"><div><label>Title</label><input name="title" value="${esc(b.title)}" required></div><div><label>Author</label><input name="author" value="${esc(b.author)}" required></div><div><label>Category</label><input name="category" value="${esc(b.category)}" list="cl" required><datalist id="cl">${[...new Set(d.books.map((x) => x.category))].map((c) => `<option>${esc(c)}</option>`).join("")}</datalist></div><div><label>Branch</label><select name="branch">${opts([...BR, "General"], b.branch)}</select></div><div><label>Total copies</label><input name="total" type="number" min="1" value="${b.total}"></div><div><label>Available copies</label><input name="avail" type="number" min="0" value="${b.avail}"></div></div><label>Description</label><textarea name="desc" rows="2">${esc(b.desc)}</textarea><p><button>${b.id ? "Save changes" : "Add book"}</button> ${b.id ? '<button type="button" class="ghost" data-act="canceledit">Cancel</button>' : ""}</p></form><br>` +
+              tbl(
+                ["ID", "Title", "Author", "Branch", "Copies", "Actions"],
+                d.books.map((x) => [
+                  x.id,
+                  esc(x.title),
+                  esc(x.author),
+                  esc(x.branch),
+                  x.avail + "/" + x.total,
+                  `<button class="sm" data-act="editbook" data-id="${x.id}">Edit</button> <button class="sm alt" data-act="delbook" data-id="${x.id}">Delete</button>`,
+                ]),
+              );
+          }
+          if (A.tab === "req")
+            body = tbl(
+              [
+                "User",
+                "Book",
+                "Requested",
+                "Status",
+                "Issued",
+                "Due",
+                "Returned",
+                "Fee due",
+                "Actions",
+              ],
+              [...d.issues]
+                .sort((a, b) => b.reqDate - a.reqDate)
+                .map((i) => {
+                  const r = bookRow(i, []);
+                  return [
+                    nm(i.uid),
+                    r[0],
+                    r[1],
+                    r[2],
+                    r[3],
+                    r[4],
+                    r[5],
+                    inr(owed(i)),
+                    i.status === "pending"
+                      ? `<button class="sm" data-act="approve" data-id="${i.id}">Approve &amp; issue</button> <button class="sm alt" data-act="reject" data-id="${i.id}">Reject</button>`
+                      : i.status === "issued"
+                        ? `<button class="sm" data-act="return" data-id="${i.id}">Mark returned</button>`
+                        : "—",
+                  ];
+                }),
+            );
+          if (A.tab === "users")
+            body =
+              tbl(
+                ["Name", "Email", "Phone", "Branch", "Category", "Role"],
+                d.users.map((x) => [
+                  esc(x.name),
+                  esc(x.email),
+                  esc(x.phone),
+                  esc(x.branch),
+                  esc(x.cat),
+                  u.role === "admin" && x.id !== u.id
+                    ? `<select data-role="${x.id}" style="width:auto">${opts(["student", "faculty", "committee", "librarian", "admin"], x.role)}</select>`
+                    : esc(x.role),
+                ]),
+              ) +
+              (u.role === "admin"
+                ? "<p>Only administrators can authorise librarian/admin roles.</p>"
+                : "");
+          if (A.tab === "pay")
+            body =
+              `<p>Total collected: <b>${inr(tot)}</b></p>` +
+              tbl(
+                ["Date", "User", "Book", "Amount", "Method", "Status"],
+                [...d.payments].reverse().map((p) => {
+                  const i = d.issues.find((x) => x.id === p.iid);
+                  return [
+                    fmt(p.date),
+                    nm(p.uid),
+                    i ? bt(i.bid) : "—",
+                    inr(p.amt),
+                    esc(p.method),
+                    p.status,
+                  ];
+                }),
+              );
+          if (A.tab === "fb")
+            body = tbl(
+              ["Date", "Name", "Email", "Category", "Message"],
+              [...d.feedback]
+                .reverse()
+                .map((f) => [
+                  fmt(f.date),
+                  esc(f.name),
+                  esc(f.email),
+                  esc(f.cat),
+                  esc(f.message),
+                ]),
+            );
+          if (A.tab === "data")
+            body = `<div class="panel"><p>Export or import all application data as JSON. Backups contain password hashes, so keep them private.</p><div class="row"><button data-act="export">Export JSON</button><label class="btn alt" style="margin:0">Import JSON<input type="file" accept=".json" data-import style="display:none"></label><button class="ghost" data-act="reset">Reset to demo data</button></div></div>`;
+          return `<h1>Admin &amp; Librarian Dashboard</h1><div class="tabs">${tabs.map((t) => `<button class="sm ${A.tab === t[0] ? "" : "ghost"}" data-act="tab" data-id="${t[0]}">${t[1]}</button>`).join("")}</div>${body}`;
+        },
+      };
+      function render() {
+        const r = route(),
+          u = user();
+        let v = r;
+        if (!V[r]) v = "home";
+        if (!u && !PUBLIC.includes(v)) {
+          v = "login";
+        } else if (u && ["login", "register"].includes(v)) v = "home";
+        else if (v === "admin" && !staff(u)) {
+          toast("Access restricted to librarians and administrators.", "err");
+          v = "home";
+        } else if (
+          u &&
+          staff(u) &&
+          ["foryou", "cart", "wishlist", "mybooks", "due", "payments"].includes(
+            v,
+          )
+        )
+          v = "admin";
+        $("#nav").innerHTML = navHtml(u, v);
+        $("#nav").classList.remove("open");
+        try {
+          $("#app").innerHTML = V[v](u);
+        } catch (e) {
+          console.error(e);
+          $("#app").innerHTML =
+            '<div class="empty">Something went wrong. Try <a href="#" data-act="reset">resetting demo data</a>.</div>';
+        }
+        document.title = (ROUTES[v] || "Account") + " | Aether";
+        if (r !== v && location.hash !== "#/" + v)
+          history.replaceState(null, "", "#/" + v);
+      }
+      window.addEventListener("hashchange", () => {
+        render();
+        scrollTo(0, 0);
+      });
+
+      document.addEventListener("click", (e) => {
+        const t = e.target.closest("[data-act]");
+        if (!t) return;
+        const a = t.dataset.act,
+          id = t.dataset.id;
+        const M = {
+          burger: () => $("#nav").classList.toggle("open"),
+          close: () => $("#dlg").close(),
+          detail: () => detail(id),
+          cart: () => addCart(id),
+          wish: () => wish(id),
+          unwish: () => unwish(id),
+          tocart: () => toCart(id),
+          towish: () => toWish(id),
+          uncart: () => uncart(id),
+          checkout,
+          logout: () => {
+            e.preventDefault();
+            logout();
+          },
+          approve: () => approve(id),
+          reject: () => reject(id),
+          return: () => giveBack(id),
+          pay: () => pay(id),
+          delbook: () => delBook(id),
+          editbook: () => {
+            A.edit = id;
+            render();
+            scrollTo(0, 0);
+          },
+          canceledit: () => {
+            A.edit = null;
+            render();
+          },
+          tab: () => {
+            A.tab = id;
+            A.edit = null;
+            render();
+          },
+          export: exportData,
+          reset: () => {
+            e.preventDefault();
+            resetData();
+          },
+          branch: () => {
+            S.q = "";
+            S.cat = "";
+            S.br = BR[id];
+            go("catalogue");
+          },
+          eye: () => {
+            const i = t.previousElementSibling;
+            i.type = i.type === "password" ? "text" : "password";
+            t.textContent = i.type === "password" ? "Show" : "Hide";
+          },
+        };
+        if (M[a]) M[a]();
+      });
+      document.addEventListener("submit", (e) => {
+        const f = e.target,
+          k = f.dataset.form;
+        if (!k) return;
+        e.preventDefault();
+        ({
+          register,
+          login,
+          feedback: sendFeedback,
+          profile: saveProfile,
+          book: saveBook,
+          hsearch: () => {
+            S.q = f.q.value.trim();
+            S.cat = "";
+            S.br = "";
+            go("catalogue");
+          },
+        })[k](f);
+      });
+      document.addEventListener("input", (e) => {
+        const k = e.target.dataset.f;
+        if (!k) return;
+        S[k] = e.target.value;
+        $("#res").innerHTML = catRes();
+      });
+      document.addEventListener("change", (e) => {
+        const t = e.target;
+        if (t.dataset.role) setRole(t.dataset.role, t.value);
+        if (t.dataset.import && t.files[0]) {
+          importData(t.files[0]);
+          t.value = "";
+        }
+      });
+      DB.load();
+      render();
+    </script>
+  </body>
+</html>
