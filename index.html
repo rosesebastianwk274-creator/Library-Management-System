@@ -633,10 +633,10 @@
           return toast("Please fill in all fields.", "err");
         if (!emailOk(email))
           return toast("Enter a valid email address.", "err");
-        if (!/^\+?\d[\d\s-]{8,13}$/.test(phone))
-          return toast("Enter a valid phone number (9–14 digits).", "err");
-        if (pw.length < 6)
-          return toast("Password must be at least 6 characters.", "err");
+        if(!/^(?:\+91[- ]?)?[6-9]\d{9}$/.test(phone))
+    return toast('Enter a valid 10-digit Indian mobile number.','err');
+        if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s]).{8,}$/.test(pw))
+    return toast('Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.','err');
         if (!BR.includes(br) || !CATS.includes(cat))
           return toast("Invalid branch or category.", "err");
         if (D().users.some((u) => u.email === email))
@@ -683,8 +683,8 @@
         const u = user(),
           name = f.name.value.trim(),
           phone = f.phone.value.trim();
-        if (!name || !/^\+?\d[\d\s-]{8,13}$/.test(phone))
-          return toast("Enter a name and a valid phone number.", "err");
+        if(!name||!/^(?:\+91[- ]?)?[6-9]\d{9}$/.test(phone))
+    return toast('Enter a valid name and 10-digit Indian mobile number.','err');
         u.name = name;
         u.phone = phone;
         u.branch = f.branch.value;
